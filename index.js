@@ -36,7 +36,7 @@ const empInfo = [
         message: 'Employee email: '
     }
 ]
-async function genEngIntern (prompts) {
+async function genEmployee (prompts) {
     //todo generate engineer or intern prompt and repeat if necessary
     let prompt = inquirer.createPromptModule();
     let addEmpMenu = await prompt(prompts);
@@ -52,20 +52,13 @@ async function userInput (promptData) {
     let mainMenu = await prompt(promptData);
     if (mainMenu.menuChoice[0]) {
         //todo generate manager first
-        console.log(Manager);
-        Manager.role = "Manager";
-        console.log(Manager.role);
+        console.log("Enter managers Information---")
+        let manager = new Manager();
+        let managerData = await genEmployee(empInfo);
+        console.log("Add employees that report to manager---")
+        let empMenu = await genEmployee(empTypes);
 
         //todo generate new employee (engineer or intern)
-        let addEmp = await genEngIntern(empTypes)
-        if (addEmp.menuChoice[0]){
-            console.log("added engineer!!!!");
-            let retMain = await genEngIntern(empTypes)
-        }
-    }
-    else if (mainMenu.menuChoice[1]){
-        let intern = new Intern();
-
     }
     //Todo return objects to pass to Genhtml 
 }
