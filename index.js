@@ -2,6 +2,9 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const crypto = require('crypto');
 const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
 //Todo enter team managers name
 //Todo enter employee id , email address, and office number
     //todo loop menu if adding additional users to add
@@ -43,23 +46,55 @@ async function genEmployee (prompts) {
     return addEmpMenu
 }
 
-async function userInput (promptData) {
+async function userInput (promptData,engArray=[],internArray=[]) {
+    //todo create prompts specific to each class as a class method if possible
     console.log("-----------------------");
     console.log("Welcome to team creator ");
     console.log("-----------------------");
+    //let engineerAdded = [];
+    //let internAdded = [];
+
     let prompt = inquirer.createPromptModule();
-    //Todo if statements for menu choices 
     let mainMenu = await prompt(promptData);
-    if (mainMenu.menuChoice[0]) {
+    if (mainMenu.menuChoice === "Add new employee") {
         //todo generate manager first
-        console.log("Enter managers Information---")
+        // Instantiate classes
         let manager = new Manager();
+        let engineer = new Engineer();
+        let intern = new Intern();
+        console.log("Enter managers Information---")
         let managerData = await genEmployee(empInfo);
         console.log("Add employees that report to manager---")
-        let empMenu = await genEmployee(empTypes);
+        let addEmp = true;
+        while (addEmp) {
+            let empMenu = await genEmployee(empTypes);
+            // Rather than pushing to arrays pushing to an external source would be better
+            if (empMenu.menuChoice === "Add Engineer"){
+                console.log("Enter Engineers Information---");
+                let engData = await engineer.engData();
+                engData = {role: engineer.getRole(), data: engData};
+                // push to engineerAdded array to write to html later
+                engArray.push(engData);
+            }
+            else if (empMenu.menuChoice === "Add Intern"){
+                console.log("Enter Interns Information---");
+                let internData = await intern.internData();
+                internData = {role: intern.getRole(), data: internData};
+                internArray.push(internData);
+            }
+            else if (empMenu.menuChoice){
+                return userInput(mainPrompts,engArray,internArray);
+            }
+        }
 
-        //todo generate new employee (engineer or intern)
     }
+    else if (mainMenu.menuChoice === "Exit") {
+        console.log(engArray);
+        console.log(internArray);
+        console.log("exiting...")
+        return
+    }
+
     //Todo return objects to pass to Genhtml 
 }
 
