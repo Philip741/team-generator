@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const Genhtml = require('./lib/Genhtml');
 
 //Todo enter team managers name
 //Todo enter employee id , email address, and office number
@@ -22,37 +23,18 @@ const empTypes = [
         choices: ['Add Engineer', 'Add Intern', 'Finished adding employees']
     }
 ]
-const empInfo = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'Employee name: '
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: 'Employee id: '
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'Employee email: '
-    }
-]
+
 async function genEmployee (prompts) {
-    //todo generate engineer or intern prompt and repeat if necessary
     let prompt = inquirer.createPromptModule();
     let addEmpMenu = await prompt(prompts);
     return addEmpMenu
 }
 
-async function userInput (promptData,engArray=[],internArray=[]) {
+async function userInput (promptData,empArray=[]) {
     //todo create prompts specific to each class as a class method if possible
     console.log("-----------------------");
     console.log("Welcome to team creator ");
     console.log("-----------------------");
-    //let engineerAdded = [];
-    //let internAdded = [];
 
     let prompt = inquirer.createPromptModule();
     let mainMenu = await prompt(promptData);
@@ -62,8 +44,12 @@ async function userInput (promptData,engArray=[],internArray=[]) {
         let manager = new Manager();
         let engineer = new Engineer();
         let intern = new Intern();
+
         console.log("Enter managers Information---")
-        let managerData = await genEmployee(empInfo);
+        let managerData = await manager.managerData();
+        managerData.role = manager.getRole();
+        empArray.push(managerData)
+        
         console.log("Add employees that report to manager---")
         let addEmp = true;
         while (addEmp) {
@@ -72,25 +58,30 @@ async function userInput (promptData,engArray=[],internArray=[]) {
             if (empMenu.menuChoice === "Add Engineer"){
                 console.log("Enter Engineers Information---");
                 let engData = await engineer.engData();
-                engData = {role: engineer.getRole(), data: engData};
+                engData.role = engineer.getRole();
                 // push to engineerAdded array to write to html later
-                engArray.push(engData);
+                empArray.push(engData);
             }
             else if (empMenu.menuChoice === "Add Intern"){
                 console.log("Enter Interns Information---");
                 let internData = await intern.internData();
-                internData = {role: intern.getRole(), data: internData};
-                internArray.push(internData);
+                internData.role = intern.getRole();
+                empArray.push(internData);
             }
             else if (empMenu.menuChoice){
-                return userInput(mainPrompts,engArray,internArray);
+                return userInput(mainPrompts,empArray);
             }
         }
 
     }
+    else if (mainMenu.menuChoice === "Write to html") {
+        
+        let genHtml = new Genhtml('./dist/index.html', empArray);
+        genHtml.writeHtml();
+    }
+
     else if (mainMenu.menuChoice === "Exit") {
-        console.log(engArray);
-        console.log(internArray);
+        console.log(empArray);
         console.log("exiting...")
         return
     }
