@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-   # team-profile-generator
+   # Team-Profile-Generator
    ## Table of contents     
    [description](#description)
 
@@ -27,6 +27,8 @@
    ## Usage
 
    ### Menu usage example
+
+   
 
 [![asciicast](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC.svg)](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC)
     
