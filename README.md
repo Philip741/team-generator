@@ -35,7 +35,7 @@
    
    ### Screenshot of generated html
    
-   ![Picture of generated team page](assets/team-generator.png "Generated team page")
+   ![Picture of generated team page](./assets/team-generator.png "Generated team page")
 
    ## Contribution
 
