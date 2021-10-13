@@ -86,14 +86,5 @@ async function userInput (promptData,empArray=[]) {
 
 }
 
-let myEmployee = new Employee('bob',222,'bob@nomail.com');
-randId = crypto.randomUUID();
-let genUser = {
-   [randId]: myEmployee 
-}
-for (const x in genUser) {
-    console.log(genUser[x].name);
-}
-
 userInput(mainPrompts);
 
