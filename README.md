@@ -27,6 +27,11 @@
 
 [![asciicast](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC.svg)](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC)
     
+   
+   ### Screenshot of generated html
+   
+   [![Picture of generated team page](assets/team-generator.png "Generated team page")
+
    ## Contribution
    
    ## Testing instructions
