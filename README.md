@@ -7,6 +7,7 @@
 
 [usage](#usage)
 
+
 [contribution](#contribution)
 
 [testing](#testing)
@@ -22,6 +23,9 @@
    ## Instructions
    Use npm install to install necessary dependencies 
    ## Usage
+   ### Menu usage example
+
+[![asciicast](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC.svg)](https://asciinema.org/a/5UGfN2qjEe2zE7uiLN4NKaNpC)
     
    ## Contribution
    
