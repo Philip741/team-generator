@@ -13,7 +13,7 @@ const mainPrompts = [
     {
         type: 'list',
         name: 'menuChoice',
-        choices: ['Add new employee', 'Write to html', 'Exit']
+        choices: ['Add new team', 'Write to html', 'Exit']
     }
 ]
 const empTypes = [
@@ -31,15 +31,13 @@ async function genEmployee (prompts) {
 }
 
 async function userInput (promptData,empArray=[]) {
-    //todo create prompts specific to each class as a class method if possible
     console.log("-----------------------");
     console.log("Welcome to team creator ");
     console.log("-----------------------");
 
     let prompt = inquirer.createPromptModule();
     let mainMenu = await prompt(promptData);
-    if (mainMenu.menuChoice === "Add new employee") {
-        //todo generate manager first
+    if (mainMenu.menuChoice === "Add new team") {
         // Instantiate classes
         let manager = new Manager();
         let engineer = new Engineer();
@@ -86,7 +84,6 @@ async function userInput (promptData,empArray=[]) {
         return
     }
 
-    //Todo return objects to pass to Genhtml 
 }
 
 let myEmployee = new Employee('bob',222,'bob@nomail.com');
@@ -98,6 +95,5 @@ for (const x in genUser) {
     console.log(genUser[x].name);
 }
 
-// Todo write out html to file
 userInput(mainPrompts);
 
