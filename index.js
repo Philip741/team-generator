@@ -6,9 +6,6 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Genhtml = require('./lib/Genhtml');
 
-//Todo enter team managers name
-//Todo enter employee id , email address, and office number
-    //todo loop menu if adding additional users to add
 const mainPrompts = [
     {
         type: 'list',
